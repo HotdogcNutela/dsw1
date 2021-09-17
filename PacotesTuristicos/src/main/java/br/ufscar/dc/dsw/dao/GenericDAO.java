@@ -15,6 +15,6 @@ abstract public class GenericDAO {
     }
 
     protected Connection getConnection() throws SQLException {
-    	return DriverManager.getConnection("jdbc:derby://localhost:1527/Livraria", "root", "root");
+    	return DriverManager.getConnection("jdbc:derby://localhost:1527/PacotesTuristicos", "root", "root");
     }
 }
