@@ -56,6 +56,9 @@ public class AgenciaController extends HttpServlet {
 
 		try {
 			switch (action) {
+				case "/cadastro":
+					apresentaFormularioCadastro(request, response);
+					break;
 				default:
 					paginaInicial(request, response);
 					break;
@@ -67,6 +70,11 @@ public class AgenciaController extends HttpServlet {
 
 	private void paginaInicial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/index.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void apresentaFormularioCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
 		dispatcher.forward(request, response);
 	}
 }
