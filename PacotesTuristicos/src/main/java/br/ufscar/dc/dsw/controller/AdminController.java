@@ -56,6 +56,18 @@ public class AdminController extends HttpServlet {
 
 		try {
 			switch (action) {
+				case "/cadastroCliente":
+					apresentaFormularioCadastroCliente(request, response);
+					break;
+				case "/cadastroAgencia":
+					apresentaFormularioCadastroAgencia(request, response);
+					break;
+				case "/listaClientes":
+					listaClientes(request, response);
+					break;
+				case "/listaAgencias":
+					listaAgencias(request, response);
+					break;
 				default:
 					paginaInicial(request, response);
 					break;
@@ -67,6 +79,32 @@ public class AdminController extends HttpServlet {
 
 	private void paginaInicial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/index.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void apresentaFormularioCadastroCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/formulario.jsp");
+		request.setAttribute("usuario", "cliente");
+		dispatcher.forward(request, response);
+	}
+
+	private void apresentaFormularioCadastroAgencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/formulario.jsp");
+		request.setAttribute("usuario", "agencia");
+		dispatcher.forward(request, response);
+	}
+
+	private void listaClientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Usuario> listaClientes = dao.getAllClientes();
+		request.setAttribute("listaClientes", listaClientes);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/listaClientes.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void listaAgencias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Usuario> listaAgencias = dao.getAllAgencias();
+		request.setAttribute("listaAgencias", listaAgencias);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/listaAgencias.jsp");
 		dispatcher.forward(request, response);
 	}
 }
