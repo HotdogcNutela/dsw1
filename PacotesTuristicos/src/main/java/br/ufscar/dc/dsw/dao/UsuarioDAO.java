@@ -30,7 +30,7 @@ public class UsuarioDAO extends GenericDAO {
             statement.setString(1, usuario.getEmail());
             statement.setString(2, usuario.getSenha());
             statement.setString(3, usuario.getNome());
-            statement.setString(4, usuario.getPapel());
+            statement.setString(4, "ADMIN");
             statement.executeUpdate();
 
             statement.close();
@@ -52,7 +52,7 @@ public class UsuarioDAO extends GenericDAO {
             statement.setString(1, usuario.getEmail());
             statement.setString(2, usuario.getSenha());
             statement.setString(3, usuario.getNome());
-            statement.setString(4, usuario.getPapel());
+            statement.setString(4, "CLIENTE");
             statement.setString(5, usuario.getCpf());
             statement.setString(6, usuario.getTelefone());
             statement.setString(7, usuario.getSexo());
@@ -78,7 +78,7 @@ public class UsuarioDAO extends GenericDAO {
             statement.setString(1, usuario.getEmail());
             statement.setString(2, usuario.getSenha());
             statement.setString(3, usuario.getNome());
-            statement.setString(4, usuario.getPapel());
+            statement.setString(4, "AGENCIA");
             statement.setString(5, usuario.getCnpj());
             statement.setString(6, usuario.getDescricao());
             statement.executeUpdate();
@@ -300,8 +300,19 @@ public class UsuarioDAO extends GenericDAO {
                 String senha = resultSet.getString("senha");
                 String nome = resultSet.getString("nome");
                 String papel = resultSet.getString("papel");
-
-                usuario = new Usuario(id, email, senha, nome, papel);
+                if (papel.equals("ADMIN")) {
+                    usuario = new Usuario(id, email, senha, nome, papel);
+                } else if (papel.equals("CLIENTE")) {
+                    String cpf = resultSet.getString("cpf");
+                    String telefone = resultSet.getString("telefone");
+                    String sexo = resultSet.getString("sexo");
+                    String dNasc = resultSet.getString("dNasc");
+                    usuario = new Usuario(id, email, senha, nome, papel, cpf, telefone, sexo, dNasc);
+                } else {
+                    String cnpj = resultSet.getString("cnpj");
+                    String descricao = resultSet.getString("descricao");
+                    usuario = new Usuario(id, email, senha, nome, papel, cnpj, descricao);
+                }
             }
 
             resultSet.close();
@@ -316,11 +327,8 @@ public class UsuarioDAO extends GenericDAO {
     /* Procura usuarios pelo login (email) */
     public Usuario getbyLogin(String email) {
         Usuario usuario = null;
-        System.out.println("Email: " + email);
 
         String sql = "SELECT * FROM Usuario WHERE email = ?";
-
-        System.out.println("Query: " + sql);
 
         try {
             Connection conn = this.getConnection();
