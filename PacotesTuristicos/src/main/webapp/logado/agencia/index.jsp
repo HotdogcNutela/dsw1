@@ -12,5 +12,6 @@
 			String contextPath = request.getContextPath().replace("/", "");
 		%>
 		<a href="/<%=contextPath%>/agencia/cadastro">Cadastrar pacote turístico</a>
+		<a href="/<%=contextPath%>/index.jsp">Página inicial</a>
 	</body>
 </html>
