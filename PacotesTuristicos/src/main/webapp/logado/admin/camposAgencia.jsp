@@ -5,8 +5,18 @@
 
 <table border="1">
 	<caption>
-		Cadastro de agência
+		<c:choose>
+			<c:when test="${agencia != null}">
+				Atualização de agência
+			</c:when>
+			<c:otherwise>
+				Cadastro de agência
+			</c:otherwise>
+		</c:choose>
 	</caption>
+	<c:if test="${agencia != null}">
+		<input type="hidden" name="id" value="<c:out value='${agencia.id}' />" />
+	</c:if>
 	<tr>
 		<td><label for="nome">Nome</label></td>
 		<td><input type="text" id="nome" name="nome" size="45"
@@ -19,7 +29,7 @@
 	</tr>
 	<tr>
 		<td><label for="senha">Senha</label></td>
-		<td><input type="text" id="senha" name="senha" size="45" required
+		<td><input type="password" id="senha" name="senha" size="45" required
 			value="${agencia.senha}" /></td>
 	</tr>
 	<tr>
@@ -33,6 +43,6 @@
 			value="${agencia.descricao}" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><input type="submit" value="Salva" /></td>
+		<td colspan="2" align="center"><input type="submit" value="Salvar" /></td>
 	</tr>
 </table>
