@@ -12,15 +12,26 @@
 			<%
 				String contextPath = request.getContextPath().replace("/", "");
 			%>
+			<a href="/<%=contextPath%>/admin">Área administrativa</a>
 			<div align="center">
 				<c:choose>
-					<c:when test="${usuario.equals('cliente')}">
-						<form action="insereCliente" method="post">
+					<c:when test="${!empty cliente && cliente == null || usuario.equals('cliente')}">
+						<form action="inserirCliente" method="post">
 							<%@include file="camposCliente.jsp"%>
 						</form>
 					</c:when>
+					<c:when test="${!empty cliente && cliente != null || usuario.equals('cliente')}">
+						<form action="atualizarCliente" method="post">
+							<%@include file="camposCliente.jsp"%>
+						</form>
+					</c:when>
+					<c:when test="${empty cliente && agencia == null}">
+						<form action="inserirAgencia" method="post">
+							<%@include file="camposAgencia.jsp"%>
+						</form>
+					</c:when>
 					<c:otherwise>
-						<form action="insereAgencia" method="post">
+						<form action="atualizarAgencia" method="post">
 							<%@include file="camposAgencia.jsp"%>
 						</form>
 					</c:otherwise>
