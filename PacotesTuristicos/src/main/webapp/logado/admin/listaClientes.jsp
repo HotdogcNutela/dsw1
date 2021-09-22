@@ -13,6 +13,7 @@
 		<%
 			String contextPath = request.getContextPath().replace("/", "");
 		%>
+		<a href="/<%=contextPath%>/admin">Área administrativa</a>
 		<div align="center">
 			<h1>Clientes</h1>
 		</div>
@@ -26,7 +27,8 @@
 					<th>CPF</th>
 					<th>Telefone</th>
 					<th>Sexo</th>
-					<th>Data de nascimento</th>
+					<!-- <th>Data de nascimento</th> -->
+					<th>Ações</th>
 				</tr>
 				<c:forEach var="cliente" items="${requestScope.listaClientes}">
 					<tr>
@@ -38,6 +40,12 @@
 						<td><c:out value="${cliente.telefone}" /></td>
 						<td><c:out value="${cliente.sexo}" /></td>
 						<!-- TODO: acrescentar data de nascimento -->
+						<td><a href="/<%= contextPath %>/admin/atualizaCliente?id=<c:out value='${cliente.id}' />">Editar</a> 
+                        			&nbsp;&nbsp;&nbsp;&nbsp;
+                            			<a href="/<%= contextPath %>/admin/removeCliente?id=<c:out value='${cliente.id}' />"
+									onclick="return confirm('Tem certeza que deseja excluir este cliente?');">
+									Remover</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
