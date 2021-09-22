@@ -59,14 +59,38 @@ public class AdminController extends HttpServlet {
 				case "/cadastroCliente":
 					apresentaFormularioCadastroCliente(request, response);
 					break;
+				case "/inserirCliente":
+					insereCliente(request, response);
+					break;
 				case "/cadastroAgencia":
 					apresentaFormularioCadastroAgencia(request, response);
+					break;
+				case "/inserirAgencia":
+					insereAgencia(request, response);
 					break;
 				case "/listaClientes":
 					listaClientes(request, response);
 					break;
 				case "/listaAgencias":
 					listaAgencias(request, response);
+					break;
+				case "/atualizaCliente":
+					apresentaFormularioEdicaoCliente(request, response);
+					break;
+				case "/atualizarCliente":
+					atualizaCliente(request, response);
+					break;
+				case "/atualizaAgencia":
+					apresentaFormularioEdicaoAgencia(request, response);
+					break;
+				case "/atualizarAgencia":
+					atualizaAgencia(request, response);
+					break;
+				case "/removeCliente":
+					removeCliente(request, response);
+					break;
+				case "/removeAgencia":
+					removeAgencia(request, response);
 					break;
 				default:
 					paginaInicial(request, response);
@@ -88,10 +112,45 @@ public class AdminController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	private void insereCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
+		String nome = request.getParameter("nome");
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+		String papel = "CLIENTE";
+		String cpf = request.getParameter("cpf");
+		String telefone = request.getParameter("telefone");
+		String sexo = request.getParameter("sexo");
+		// String dNasc = request.getParameter("dNasc");
+		String dNasc = "...";
+		
+		Usuario cliente = new Usuario(email, senha, nome, papel, cpf, telefone, sexo, dNasc);
+
+		dao.insertCliente(cliente);
+		response.sendRedirect("listaClientes");
+	}
+
 	private void apresentaFormularioCadastroAgencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/formulario.jsp");
 		request.setAttribute("usuario", "agencia");
 		dispatcher.forward(request, response);
+	}
+
+	private void insereAgencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
+		String nome = request.getParameter("nome");
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+		String papel = "AGENCIA";
+		String cnpj = request.getParameter("cnpj");
+		String descricao = request.getParameter("descricao");
+		
+		Usuario agencia = new Usuario(email, senha, nome, papel, cnpj, descricao);
+
+		dao.insertAgencia(agencia);
+		response.sendRedirect("listaAgencias");
 	}
 
 	private void listaClientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -106,5 +165,70 @@ public class AdminController extends HttpServlet {
 		request.setAttribute("listaAgencias", listaAgencias);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/listaAgencias.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	private void apresentaFormularioEdicaoCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Usuario cliente = dao.get(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/formulario.jsp");
+		request.setAttribute("cliente", cliente);
+		dispatcher.forward(request, response);
+	}
+
+	private void atualizaCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		Long id = Long.parseLong(request.getParameter("id"));
+		String nome = request.getParameter("nome");
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+		String papel = "CLIENTE";
+		String cpf = request.getParameter("cpf");
+		String telefone = request.getParameter("telefone");
+		String sexo = request.getParameter("sexo");
+		// String dNasc = request.getParameter("dNasc");
+		String dNasc = "...";
+		
+		Usuario cliente = new Usuario(id, email, senha, nome, papel, cpf, telefone, sexo, dNasc);
+
+		dao.updateCliente(cliente);
+		response.sendRedirect("listaClientes");
+	}
+
+	private void apresentaFormularioEdicaoAgencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Usuario agencia = dao.get(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/formulario.jsp");
+		request.setAttribute("agencia", agencia);
+		dispatcher.forward(request, response);
+	}
+
+	private void atualizaAgencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		Long id = Long.parseLong(request.getParameter("id"));
+		String nome = request.getParameter("nome");
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+		String papel = "AGENCIA";
+		String cnpj = request.getParameter("cnpj");
+		String descricao = request.getParameter("descricao");
+		
+		Usuario agencia = new Usuario(id, email, senha, nome, papel, cnpj, descricao);
+
+		dao.updateAgencia(agencia);
+		response.sendRedirect("listaAgencias");
+	}
+
+	private void removeCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Usuario cliente = new Usuario(id);
+		dao.delete(cliente);
+		response.sendRedirect("listaClientes");
+	}
+
+	private void removeAgencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Usuario agencia = new Usuario(id);
+		dao.delete(agencia);
+		response.sendRedirect("listaAgencias");
 	}
 }
