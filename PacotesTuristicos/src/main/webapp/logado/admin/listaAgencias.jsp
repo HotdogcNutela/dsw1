@@ -13,6 +13,7 @@
 		<%
 			String contextPath = request.getContextPath().replace("/", "");
 		%>
+		<a href="/<%=contextPath%>/admin">Área administrativa</a>
 		<div align="center">
 			<h1>Agências</h1>
 		</div>
@@ -25,6 +26,7 @@
 					<th>Senha</th>
 					<th>CNPJ</th>
 					<th>Descrição</th>
+					<th>Ações</th>
 				</tr>
 				<c:forEach var="agencia" items="${requestScope.listaAgencias}">
 					<tr>
@@ -34,6 +36,12 @@
 						<td><c:out value="${agencia.senha}" /></td>
 						<td><c:out value="${agencia.cnpj}" /></td>
 						<td><c:out value="${agencia.descricao}" /></td>
+						<td><a href="/<%= contextPath %>/admin/atualizaAgencia?id=<c:out value='${agencia.id}' />">Editar</a> 
+                        			&nbsp;&nbsp;&nbsp;&nbsp;
+                            			<a href="/<%= contextPath %>/admin/removeAgencia?id=<c:out value='${agencia.id}' />"
+									onclick="return confirm('Tem certeza que deseja excluir esta agência?');">
+									Remover</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
