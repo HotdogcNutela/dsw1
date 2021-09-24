@@ -1,29 +1,27 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Pacote {
 
 	private Long id;
 	private String nome;
-	private String cnpj;
+	private Usuario agencia;
 	private String cidade;
 	private String estado;
 	private String pais;
 	private Date partida;
 	private Integer duracao;
 	private Float valor;
-	// fotos
-	// descricao pdf
 
 	public Pacote(Long id) {
 		this.id = id;
 	}
 
-	public Pacote(String nome, String cnpj, String cidade, String estado, String pais, Date partida, Integer duracao, Float valor) {
+	public Pacote(String nome, Usuario agencia, String cidade, String estado, String pais, Date partida, Integer duracao, Float valor) {
 		super();
 		this.nome = nome;
-		this.cnpj = cnpj;
+		this.agencia = agencia;
 		this.cidade = cidade;
 		this.estado = estado;
 		this.pais = pais;
@@ -32,11 +30,11 @@ public class Pacote {
 		this.valor = valor;
 	}
 
-	public Pacote(Long id, String nome, String cnpj, String cidade, String estado, String pais, Date partida, Integer duracao, Float valor) {
+	public Pacote(Long id, String nome, Usuario agencia, String cidade, String estado, String pais, Date partida, Integer duracao, Float valor) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.cnpj = cnpj;
+		this.agencia = agencia;
 		this.cidade = cidade;
 		this.estado = estado;
 		this.pais = pais;
@@ -61,12 +59,12 @@ public class Pacote {
 		this.nome = nome;
 	}
 
-	public String getCnpj() {
-		return cnpj;
+	public Usuario getAgencia() {
+		return agencia;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setAgencia(Usuario agencia) {
+		this.agencia = agencia;
 	}
 
 	public String getCidade() {
