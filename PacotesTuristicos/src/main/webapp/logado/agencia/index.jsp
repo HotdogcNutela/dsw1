@@ -7,11 +7,11 @@
 	</head>
 	<body>
 		<h2>Bem-vindo à área da agência!!</h2>
-		<h3>TODO: listar todos os pacotes da agência</h3>
 		<%
 			String contextPath = request.getContextPath().replace("/", "");
 		%>
-		<a href="/<%=contextPath%>/agencia/cadastro">Cadastrar pacote turístico</a>
+		<a href="/<%=contextPath%>/pacote/cadastroPacote">Cadastrar pacotes turísticos</a><br/>
+		<a href="/<%=contextPath%>/pacote/listaPacotesAgencia">Listar pacotes turísticos</a><br/>
 		<a href="/<%=contextPath%>/index.jsp">Página inicial</a>
 	</body>
 </html>
