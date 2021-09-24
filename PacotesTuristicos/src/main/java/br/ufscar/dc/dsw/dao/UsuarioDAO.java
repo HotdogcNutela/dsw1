@@ -353,4 +353,35 @@ public class UsuarioDAO extends GenericDAO {
         }
         return usuario;
     }
+
+    public Usuario getAgenciaByCnpj(String cnpj) {
+        Usuario agencia = null;
+
+        String sql = "SELECT * FROM Usuario WHERE cnpj = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, cnpj);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String nome = resultSet.getString("nome");
+                String papel = resultSet.getString("papel");
+                String descricao = resultSet.getString("descricao");
+
+                agencia = new Usuario(id, email, senha, nome, papel, cnpj, descricao);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return agencia;
+    }
 }
