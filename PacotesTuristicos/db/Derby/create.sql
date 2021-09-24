@@ -1,17 +1,29 @@
-connect 'jdbc:derby:PacotesTuristicos;create=true;user=root;password=root';
+connect 'jdbc:derby:PacotesTuristicos;create=true;user=root;password=root;';
 
 create table Usuario(id bigint not null generated always as identity, 
 					 email varchar(64) not null unique, 
 					 senha varchar(64) not null, 
 					 nome varchar(256) not null, 
 					 papel varchar(16) not null, 
-					 cpf varchar(32),
+					 cpf varchar(32) unique,
 					 telefone varchar(32),
 					 sexo char(2), 
 					 dNasc varchar(16),
-					 cnpj varchar(32),
+					 cnpj varchar(32) unique,
 					 descricao varchar(256),
 					 constraint Usuario_PK primary key (id));
+
+create table Pacote(id bigint not null generated always as identity,
+					nome varchar(64) not null,
+					cnpj varchar(32) not null,
+					cidade varchar(64) not null,
+					estado varchar(64),
+					pais varchar(64) not null,
+					partida date not null,
+					duracao integer not null,
+					valor float not null,
+					constraint Pacote_PK primary key (id), 
+					constraint Agencia_FK foreign key (cnpj) references Usuario(cnpj));
 
 insert into Usuario(email, senha, nome, papel) 
 	values ('admin@email.com', 'admin', 'Admin', 'ADMIN');
@@ -33,6 +45,12 @@ insert into Usuario(email, senha, nome, papel, cnpj, descricao)
 
 insert into Usuario(email, senha, nome, papel, cnpj, descricao)
 	values ('agencia3@email.com', 'agencia3', 'Turisticando', 'AGENCIA', '15.111.555/0001-00', 'Quer planejar sua viagem? Vem com a gente!!');
+
+insert into Pacote(nome, cnpj, cidade, estado, pais, partida, duracao, valor) 
+	values ('Pacote 1', '13.444.222/0001-77', 'São Paulo', 'São Paulo', 'Brasil', '12.10.2021', 5, 350.59);
+
+insert into Pacote(nome, cnpj, cidade, estado, pais, partida, duracao, valor) 
+	values ('Pacote 2', '15.111.555/0001-00', 'Camburiú', 'Santa Catarina', 'Brasil', '20.12.2021', 10, 942.50);
 
 disconnect;
 
