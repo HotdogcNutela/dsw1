@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <html>
-	<head>
-		<title>Agência</title>
-	</head>
-	<body>
-		<h2>Bem-vindo à área da agência!!</h2>
-		<%
-			String contextPath = request.getContextPath().replace("/", "");
-		%>
-		<a href="/<%=contextPath%>/pacote/cadastroPacote">Cadastrar pacotes turísticos</a><br/>
-		<a href="/<%=contextPath%>/pacote/listaPacotesAgencia">Listar pacotes turísticos</a><br/>
-		<a href="/<%=contextPath%>/index.jsp">Página inicial</a>
-	</body>
+	<fmt:bundle basename="message">
+		<head>
+			<title><fmt:message key="agency.title"/></title>
+		</head>
+		<body>
+			<h2><fmt:message key="agency.welcome"/>, ${sessionScope.usuarioLogado.nome}!!</h2>
+			<%
+				String contextPath = request.getContextPath().replace("/", "");
+			%>
+			<a href="/<%=contextPath%>/pacote/cadastroPacote"><fmt:message key="agency.insert"/></a><br/>
+			<a href="/<%=contextPath%>/pacote/listaPacotesAgencia"><fmt:message key="agency.list.trip"/></a><br/>
+			<a href="/<%=contextPath%>/index.jsp"><fmt:message key="homepage"/></a>
+		</body>
+	</fmt:bundle>
 </html>
