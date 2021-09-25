@@ -23,7 +23,8 @@ create table Pacote(id bigint not null generated always as identity,
 					duracao integer not null,
 					valor float not null,
 					constraint Pacote_PK primary key (id), 
-					constraint Agencia_FK foreign key (cnpj) references Usuario(cnpj));
+					constraint Agencia_FK foreign key (cnpj) references Usuario(cnpj) 
+					ON DELETE CASCADE);
 
 insert into Usuario(email, senha, nome, papel) 
 	values ('admin@email.com', 'admin', 'Admin', 'ADMIN');
