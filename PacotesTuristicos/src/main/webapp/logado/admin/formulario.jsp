@@ -4,15 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <html>
-	<!-- <fmt:bundle basename="message"> -->
+	<fmt:bundle basename="message">
 		<head>
-			<title>Cadastro</title>
+			<title><fmt:message key="admin.insert"/></title>
 		</head>
 		<body>
 			<%
 				String contextPath = request.getContextPath().replace("/", "");
 			%>
-			<a href="/<%=contextPath%>/admin">Área administrativa</a>
+			<a href="/<%=contextPath%>/admin"><fmt:message key="admin.title"/></a>
 			<div align="center">
 				<c:choose>
 					<c:when test="${!empty cliente && cliente == null || usuario.equals('cliente')}">
@@ -37,6 +37,7 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
+			<h6><fmt:message key="required.fields"/></h6>
 			<c:if test="${!empty requestScope.mensagens}">
 				<ul class="erro">
 					<c:forEach items="${requestScope.mensagens}" var="mensagem">
@@ -45,5 +46,5 @@
 				</ul>
 			</c:if>
 		</body>
-	<!-- </fmt:bundle> -->
+	</fmt:bundle>
 </html>
