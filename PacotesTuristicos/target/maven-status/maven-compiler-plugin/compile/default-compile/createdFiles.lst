@@ -1,8 +1,13 @@
-br\ufscar\dc\dsw\controller\IndexController.class
+br\ufscar\dc\dsw\fileUpload\Constants.class
 br\ufscar\dc\dsw\dao\UsuarioDAO.class
-br\ufscar\dc\dsw\domain\Usuario.class
 br\ufscar\dc\dsw\controller\AgenciaController.class
 br\ufscar\dc\dsw\util\Erro.class
 br\ufscar\dc\dsw\controller\AdminController.class
 br\ufscar\dc\dsw\controller\ClienteController.class
+br\ufscar\dc\dsw\controller\PacoteController.class
+br\ufscar\dc\dsw\dao\PacoteDAO.class
+br\ufscar\dc\dsw\fileUpload\UploadFileServlet.class
+br\ufscar\dc\dsw\controller\IndexController.class
+br\ufscar\dc\dsw\domain\Pacote.class
+br\ufscar\dc\dsw\domain\Usuario.class
 br\ufscar\dc\dsw\dao\GenericDAO.class

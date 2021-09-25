@@ -15,8 +15,6 @@
 		</head>
 		<body>
 			<a href="login.jsp"><fmt:message key="homepage.login"/></a>
-			<!-- TODO: listar os pacotes turísticos disponíveis -->
-			<h3>Olá! Aqui serão listados os pacotes turísticos disponíveis!</h3>
 		</body>
 	</fmt:bundle>
 </html>
