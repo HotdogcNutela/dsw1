@@ -4,9 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <html>
-	<!-- <fmt:bundle basename="message"> -->
+	<fmt:bundle basename="message">
 		<head>
-			<title>Cadastro de pacotes turísticos</title>
+			<title><fmt:message key="form.trip"/></title>
 		</head>
 		<body>
 			<%
@@ -17,6 +17,7 @@
 					<%@include file="campos.jsp"%>
 				</form>
 			</div>
+			<h6><fmt:message key="required.fields"/></h6>
 			<c:if test="${!empty requestScope.mensagens}">
 				<ul class="erro">
 					<c:forEach items="${requestScope.mensagens}" var="mensagem">
@@ -25,5 +26,5 @@
 				</ul>
 			</c:if>
 		</body>
-	<!-- </fmt:bundle> -->
+	</fmt:bundle>
 </html>
