@@ -23,7 +23,7 @@
         DONE - Remover agências do banco de dados
 
     SE SOBRAR TEMPO:
-        TODO - CNPJ não está sendo lido do banco de dados
+        DONE - CNPJ não está sendo lido do banco de dados
         TODO - Erro ao editar agência que possui pacotes cadastrados (provavelmente tem que atualizar os pacotes também?)
         TODO - Erro ao remover agências que possuem pacotes cadastrados (talvez tenha que adicionar CONSTRAINT na criação do banco de dados ou algo do tipo)
 
